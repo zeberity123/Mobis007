@@ -11,7 +11,7 @@ import random
 import cv2
 import numpy as np
 
-
+# 총 영상 1413개 (_30hz로 끝나는 bin파일 개수)
 
 def nanoseconds_to_unix_timestamp(nanoseconds, gmt_offset_hours=9):
     # 나노초를 초로 변환 (10^9 나누기)
