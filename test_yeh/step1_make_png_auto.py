@@ -107,7 +107,7 @@ def yuv422_to_rgb(raw_data):
 def process_folder(root_folder, save_folder):
     try:
         print(f"Starting folder processing at {root_folder}")
-        for foldername, subfolders, filenames in os.walk(root_folder):
+        for foldername, filenames in os.walk(root_folder):
             # Video 폴더 찾기
             if 'Video' in foldername:
                 print(f"Found 'Video' folder: {foldername}")
