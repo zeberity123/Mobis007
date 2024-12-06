@@ -3,7 +3,7 @@ import list_step_1
 import cv2
 
 origin_tw_root = f'Z:\TW'
-txt_file = f'모비스_mcam_v5/auto_test_ubuntu/file_list.txt'
+txt_file = f'모비스_mcam_v5/auto_test_ubuntu/file_list_original.txt'
 # home_root = f'/home/ubuntu/Curation_MOBIS_MCAM'
 home_root = f'Z:\step_1_241203'
 
@@ -25,10 +25,11 @@ for folder_name in tw_folder_list:
             tw_list.append(tw_file_roots)
 
 cnt = 0
-for i in tw_list[:800]:
+for i in tw_list[800:805]:
     cnt+=1
     e1 = cv2.getTickCount()
-    list_step_1.auto_step_1(i[0], i[1], i[2])
+    # list_step_1.auto_step_1()
+    print(i[0], i[1], i[2])
     e2 = cv2.getTickCount()
 
     total_time = (e2-e1)/cv2.getTickFrequency()

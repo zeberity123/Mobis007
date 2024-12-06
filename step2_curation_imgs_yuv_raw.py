@@ -117,15 +117,17 @@ if __name__ == '__main__':
 
     # Step1 작업이 수행된 폴더 중 1개를 지정
     result_rootd = fr'C:\Users\user\Desktop\20241202\20241007_095121'
+    result_rootd = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241004_174606_Mabook2Banpo/20241004_174606'
 
     # result_rootd에 해당하는 yuv 원본 binary가 들어있는 폴더 경로 지정
     yuuv_dir = fr'20241007_095120_Anyang2Dangjin\Front\Video\FRCMR_IMG_FR_UYVY_20241007_095121_1920_1080_30Hz.bin'
+    yuuv_dir = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW/20241004_174606_Mabook2Banpo/Front/Video'
 
     # result_rootd에 해당하는 raw(bayer) binary가 들어있는 폴더 경로 지정
     rgb12_dir = fr'20241007_095120_Anyang2Dangjin\Front\Video\FRCMR_IMG_FR_UYVY_20241007_095121_1920_1080_30Hz.bin'
-
+    rgb12_dir = yuuv_dir
     # selection된 key frame 번호 지정
-    key_frame_no = 19007
+    key_frame_no = 42693
     # 추출할 10개의 frame 번호에 대한 list
     frame_no_list = list()
 
@@ -202,7 +204,7 @@ if __name__ == '__main__':
                 target_png_path = os.path.join(Img_full_dir, f'{str(cur_frameid).zfill(6)}.png')
                 #target_dark_png_path = os.path.join(Dark_img_full_dir, f'{str(cur_frameid + 1).zfill(5)}.png')
 
-                shutil.copy2(target_png_path, Img_dir)
+                shutil.copy(target_png_path, Img_dir)
                 print(f'{os.path.basename(target_png_path)}가 {Img_dir} 폴더로 복사되었습니다.')
 
                 #shutil.copy2(target_dark_png_path, Dark_img_dir)

@@ -127,7 +127,7 @@ def auto_step_2(result_root, yuuv_root, rgb12_root, key_frame_num):
     rgb12_dir = rgb12_root
     # selection된 key frame 번호 지정
     # key_frame_no = 166427
-    key_frame_no = key_frame_num
+    key_frame_no = int(key_frame_num)
  
     # 추출할 10개의 frame 번호에 대한 list
     frame_no_list = list()
@@ -204,8 +204,9 @@ def auto_step_2(result_root, yuuv_root, rgb12_root, key_frame_num):
                 # img_full 폴더에서, 대상 png 파일을 복사해준다.
                 target_png_path = os.path.join(Img_full_dir, f'{str(cur_frameid).zfill(6)}.png')
                 #target_dark_png_path = os.path.join(Dark_img_full_dir, f'{str(cur_frameid + 1).zfill(5)}.png')
-
-                shutil.copy2(target_png_path, Img_dir)
+                # print('roooto', target_png_path, Img_dir)
+                new_Img = target_png_path.split('/')[-1]
+                shutil.copyfile(target_png_path, f'{Img_dir}/{new_Img}')
                 print(f'{os.path.basename(target_png_path)}가 {Img_dir} 폴더로 복사되었습니다.')
 
                 #shutil.copy2(target_dark_png_path, Dark_img_dir)

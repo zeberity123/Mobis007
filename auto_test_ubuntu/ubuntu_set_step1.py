@@ -3,7 +3,7 @@ import list_step_1
 import cv2
 
 origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
-txt_file = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW/모비스_mcam_v5/auto_test_ubuntu/file_list.txt'
+txt_file = f'/home/ubuntu/Mobis007/auto_test_ubuntu/file_list_original.txt'
 # home_root = f'/home/ubuntu/Curation_MOBIS_MCAM'
 home_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203'
 
@@ -25,11 +25,13 @@ for folder_name in tw_folder_list:
             tw_list.append(tw_file_roots)
 
 cnt = 0
-for i in tw_list[800:]:
+for i in tw_list[793:800]:
     cnt+=1
     e1 = cv2.getTickCount()
     list_step_1.auto_step_1(i[0], i[1], i[2])
     e2 = cv2.getTickCount()
-
+    # print(i[0])
+    # print(i[1])
+    # print(i[2])
     total_time = (e2-e1)/cv2.getTickFrequency()
     print(f'Total time: {total_time}seconds.....{cnt}/{len(tw_list)}')
