@@ -15,7 +15,8 @@ for folder_name in step_1_folders:
         i_split = i.split('_')
         if len(i_split) == 5:
             i_folder_list = os.listdir(f'{step_1_dir}/{folder_name}/{i}')
-            if 'pcd' not in i_folder_list:
+            # if 'pcd' not in i_folder_list:
+            if ('8879_ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
                 key_frame = i_split[-1]
                 fname_no_frame = f'{i_split[0]}_{i_split[1]}'
                 lidar_fname = f'{i_split[2]}_{i_split[3]}.bin'
@@ -42,8 +43,9 @@ print(f'files to process: {len(files_for_step_3)}')
 for i in files_for_step_3:
     cnt+=1
     e1 = cv2.getTickCount()
-    list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
-    set_step_4.auto_step_4(i[4])
+    # list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
+    # set_step_4.auto_step_4(i[4])
+    # set_step_4.delete_json(i[4])
     e2 = cv2.getTickCount()
     done.append(f'done: {i[0]}::{i[3]}')
     total_time = (e2-e1)/cv2.getTickFrequency()
@@ -53,7 +55,11 @@ for i in files_for_step_3:
 for i in pcd_already_done:
     print(i)
 
+done_txt = 'step_3_4_1209_1001.txt'
+with open(done_txt, 'w+') as f:
+    f.write('\n'.join(done))
 for i in done:
     print(i)
 
 print(len(done))
+print(len(pcd_already_done))

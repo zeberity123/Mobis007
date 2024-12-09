@@ -143,6 +143,9 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
     head_file = head_dir
     key_frame_no = key_frame_num
 
+    # filename test:
+    # with open(head_file, "r") as file:
+    #     index = 0
 
     # Step1.이 수행된 폴더에 있는(또는 해당 결과물의) timestamp.txt 경로
     img_timestamp_txt = open(os.path.join(result_rootd, 'timestamp_info.txt'), 'r')

@@ -8,10 +8,9 @@ result_folder_name = f'20241111_182858_Gwacheon2Kwangmyung'
 # key_frames = '042693, 042753, 042813'
 
 # key_frames = '042693'
-key_frames = '016495, 022253, 023573, 025433, 029333, 051839, 053219, 053999, 056279, 159361, 167281'
-key_frames = '30773, 34073, 38513, 40143, 41583, 44583, 48783, 67259, 68939'
-
-key_frames = [i for i in key_frames.split(', ')]
+key_frames = '169683	171243	172503	175323	187969	195051	197811'
+key_frames = [i.strip() for i in key_frames.split('\t')]
+print(key_frames)
 origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
 home_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203'
 

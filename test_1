@@ -1,0 +1,3 @@
+key_frames = '44583	48783	51839	53219	53999	56279	67259	68939'
+key_frames = [i.strip() for i in key_frames.split('\t')]
+print(key_frames)
