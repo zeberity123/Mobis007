@@ -8,7 +8,7 @@ result_folder_name = f'20241111_182858_Gwacheon2Kwangmyung'
 # key_frames = '042693, 042753, 042813'
 
 # key_frames = '042693'
-key_frames = '169683	171243	172503	175323	187969	195051	197811'
+key_frames = '203027	204647	207527	210107	219047	223445	231605	241197	243117	246531	251751	252831'
 key_frames = [i.strip() for i in key_frames.split('\t')]
 print(key_frames)
 origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'

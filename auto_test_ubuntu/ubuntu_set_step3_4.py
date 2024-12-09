@@ -9,6 +9,23 @@ step_1_dir = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_00
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
 pcd_already_done = []
+# search only input folders:
+# step_1_folders = ['20241111_182858_Gwacheon2Kwangmyung']
+
+
+def check_step_2(folder_dir):
+    len_img = len(os.listdir(f'{folder_dir}/img'))
+    len_raw = len(os.listdir(f'{folder_dir}/raw'))
+    len_yuv = len(os.listdir(f'{folder_dir}/yuv'))
+    # print(f'checking cs2_{folder_dir}')
+    # print(f'img:{len_img},raw:{len_raw},yuv:{len_yuv}')
+
+    if len_img == 10 and len_raw == 10 and len_yuv == 10:
+        return True
+    else:
+        return False
+    
+
 for folder_name in step_1_folders:
     temp_folder_list = os.listdir(f'{step_1_dir}/{folder_name}')
     for i in temp_folder_list:
@@ -16,7 +33,7 @@ for folder_name in step_1_folders:
         if len(i_split) == 5:
             i_folder_list = os.listdir(f'{step_1_dir}/{folder_name}/{i}')
             # if 'pcd' not in i_folder_list:
-            if ('8879_ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
+            if ('8879_ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list) and check_step_2(f'{step_1_dir}/{folder_name}/{i}'):
                 key_frame = i_split[-1]
                 fname_no_frame = f'{i_split[0]}_{i_split[1]}'
                 lidar_fname = f'{i_split[2]}_{i_split[3]}.bin'
@@ -43,8 +60,8 @@ print(f'files to process: {len(files_for_step_3)}')
 for i in files_for_step_3:
     cnt+=1
     e1 = cv2.getTickCount()
-    # list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
-    # set_step_4.auto_step_4(i[4])
+    list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
+    set_step_4.auto_step_4(i[4])
     # set_step_4.delete_json(i[4])
     e2 = cv2.getTickCount()
     done.append(f'done: {i[0]}::{i[3]}')
@@ -52,14 +69,15 @@ for i in files_for_step_3:
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
 
-for i in pcd_already_done:
-    print(i)
+# for i in pcd_already_done:
+#     print(i)
 
-done_txt = 'step_3_4_1209_1001.txt'
+done_txt = 'step_3_4_1209_1400.txt'
 with open(done_txt, 'w+') as f:
     f.write('\n'.join(done))
+
 for i in done:
     print(i)
 
-print(len(done))
-print(len(pcd_already_done))
+print(f'n_of_done: {len(done)}')
+print(f'n_of_pcd_already_done: {len(pcd_already_done)}')
