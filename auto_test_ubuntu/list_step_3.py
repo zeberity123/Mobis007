@@ -130,6 +130,26 @@ DATA ascii
     print(f"{pcd_path} 저장이 완료되었습니다.")
 
 
+def check_headfile_filename(head_dir):
+    head_file = head_dir
+    # filename test:
+    try:
+        with open(head_file, "r") as file:
+            return 0
+    except:
+        num_headfile = head_file[-16:]
+        original_headnum = int(num_headfile.split('.')[0]) - 1
+        str_original_headnum = str(original_headnum).zfill(6)
+        str_new_headnum = str(original_headnum+1).zfill(6)
+        original_headfile = f'{head_file[:-16]}{str_original_headnum}.timestamp'
+        original_bin_file = f'{head_file[:-16]}{str_original_headnum}.bin'
+        new_bin_file = f'{head_file[:-16]}{str_new_headnum}.bin'
+        print('errrorrrrr', num_headfile)
+        if os.path.isfile(original_headfile) and os.path.isfile(original_bin_file):
+            print(f'changing {original_headfile} to {head_file}')
+            os.rename(original_headfile, head_file)
+            os.rename(original_bin_file, new_bin_file)
+            return f'{head_file}'
 
 def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
     # Step1 작업이 수행된 폴더 중 1개를 지정
@@ -143,10 +163,6 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
     head_file = head_dir
     key_frame_no = key_frame_num
 
-    # filename test:
-    # with open(head_file, "r") as file:
-    #     index = 0
-    # return 0
 
     # Step1.이 수행된 폴더에 있는(또는 해당 결과물의) timestamp.txt 경로
     img_timestamp_txt = open(os.path.join(result_rootd, 'timestamp_info.txt'), 'r')
