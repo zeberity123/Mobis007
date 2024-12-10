@@ -1,0 +1,3 @@
+/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW/20241116_171243_Danyang2Wonju/Front/LiDAR/FRCMR_Lidar1_20241116_171244.timestamp
+/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW/20241116_171243_Danyang2Wonju/Front/LiDAR/FRCMR_Lidar1_20241116_171244.timestamp
+/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW/20241116_171243_Danyang2Wonju/Front/LiDAR/FRCMR_Lidar1_20241116_171244.timestamp

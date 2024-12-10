@@ -1,0 +1,7 @@
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_193158::241197
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_193158::243117
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_192558::219047
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_192258::203027
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_192258::204647
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_192258::207527
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241111_182858_Gwacheon2Kwangmyung/20241111_192258::210107
