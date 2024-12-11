@@ -147,9 +147,10 @@ def check_headfile_filename(head_dir):
         print('errrorrrrr', num_headfile)
         if os.path.isfile(original_headfile) and os.path.isfile(original_bin_file):
             print(f'changing {original_headfile} to {head_file}')
-            os.rename(original_headfile, head_file)
-            os.rename(original_bin_file, new_bin_file)
+            # os.rename(original_headfile, head_file)
+            # os.rename(original_bin_file, new_bin_file)
             return f'{head_file}'
+        return f'{head_file}'
 
 def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
     # Step1 작업이 수행된 폴더 중 1개를 지정

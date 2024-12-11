@@ -10,7 +10,7 @@ step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
 pcd_already_done = []
 # search only input folders:
-step_1_folders = ['20241116_171243_Danyang2Wonju']
+# step_1_folders = ['20241114_104214_Chungdam2songpa']
 
 
 def check_step_2(folder_dir):
@@ -64,11 +64,14 @@ for i in files_for_step_3:
     diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
     if diff_headfile_name != 0:
         diff_headfile_names.append(diff_headfile_name)
-    ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
-    set_step_4.auto_step_4(i[4])
+        
+    else:
+        ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
+        set_step_4.auto_step_4(i[4])
+        done.append(f'done: {i[0]}::{i[3]}')
     # set_step_4.delete_json(i[4])
     e2 = cv2.getTickCount()
-    done.append(f'done: {i[0]}::{i[3]}')
+    
     total_time = (e2-e1)/cv2.getTickFrequency()
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
@@ -76,18 +79,20 @@ for i in files_for_step_3:
 # for i in pcd_already_done:
 #     print(i)
 
-done_txt = 'step_3_4_1210_03.txt'
+done_txt = 'step_3_4_1212_01.txt'
 with open(done_txt, 'w+') as f:
-    f.write('\n'.join(diff_headfile_names))
+    f.write('\n'.join(done))
 
-diff_headfile_txt = 'diff_head_1210_03.txt'
+diff_headfile_txt = 'diff_head_1212_01.txt'
 with open(diff_headfile_txt, 'w+') as f:
     f.write('\n'.join(diff_headfile_names))
 
-for i in done:
-    print(i)
+# for i in done:
+#     print(i)
 
-print(diff_headfile_names)
+# print(diff_headfile_names)
+# for i in diff_headfile_names:
+#     print(i)
 
 print(f'n_of_done: {len(done)}')
 print(f'n_of_pcd_already_done: {len(pcd_already_done)}')

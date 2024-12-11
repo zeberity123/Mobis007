@@ -1,0 +1,4 @@
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241114_104214_Chungdam2songpa/20241114_104215::7495
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241114_104214_Chungdam2songpa/20241114_104215::10495
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241114_104214_Chungdam2songpa/20241114_104815::28261
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241114_104214_Chungdam2songpa/20241114_104815::31381

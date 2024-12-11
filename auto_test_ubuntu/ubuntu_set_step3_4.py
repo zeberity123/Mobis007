@@ -10,7 +10,8 @@ step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
 pcd_already_done = []
 # search only input folders:
-# step_1_folders = ['20241116_171243_Danyang2Wonju']
+# step_1_folders = ['20241116_110423_Osan2Chungju', '20241113_191104_Namisum2Gwangmyung']
+# step_1_folders = ['20241114_104214_Chungdam2songpa']
 
 
 def check_step_2(folder_dir):
@@ -51,7 +52,7 @@ for folder_name in step_1_folders:
                 files_for_step_3.append([result_dir_from_1, lidar_dir, head_dir, key_frame, step_4_dir])
 
             else:
-                pcd_already_done.append(f'pcd already exists: {i}')
+                pcd_already_done.append(f'pcd already exists: {folder_name}/{i}')
 
 
 cnt = 0
@@ -78,7 +79,7 @@ for i in files_for_step_3:
 
 # done_txt = 'step_3_4_1210_03.txt'
 # with open(done_txt, 'w+') as f:
-#     f.write('\n'.join(diff_headfile_names))
+#     f.write('\n'.join(done))
 
 # diff_headfile_txt = 'diff_head_1210_03.txt'
 # with open(diff_headfile_txt, 'w+') as f:
