@@ -1,0 +1,3 @@
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241010_123336_Muido2Daebudo/20241010_123337::8941
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241010_123336_Muido2Daebudo/20241010_123337::11221
+done: /run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203/20241010_123336_Muido2Daebudo/20241010_123337::13501

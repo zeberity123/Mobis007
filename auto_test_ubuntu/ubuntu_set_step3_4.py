@@ -1,5 +1,5 @@
 import os
-import list_step_3
+import ubuntu_list_step_3
 import set_step_4
 import cv2
 
@@ -11,7 +11,7 @@ files_for_step_3 = []
 pcd_already_done = []
 # search only input folders:
 # step_1_folders = ['20241116_110423_Osan2Chungju', '20241113_191104_Namisum2Gwangmyung']
-# step_1_folders = ['20241114_104214_Chungdam2songpa']
+step_1_folders = ['20241113_191104_Namisum2Gwangmyung']
 
 
 def check_step_2(folder_dir):
@@ -62,9 +62,9 @@ print(f'files to process: {len(files_for_step_3)}')
 for i in files_for_step_3:
     cnt+=1
     e1 = cv2.getTickCount()
-    # diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
-    # if diff_headfile_name != 0:
-    #     diff_headfile_names.append(diff_headfile_name)
+    diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
+    if diff_headfile_name != 0:
+        diff_headfile_names.append([diff_headfile_name, i[3]])
     # ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
     # set_step_4.auto_step_4(i[4])
     # set_step_4.delete_json(i[4])
@@ -73,20 +73,31 @@ for i in files_for_step_3:
     total_time = (e2-e1)/cv2.getTickFrequency()
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
+diff_headfiles = [f'{i[0].split('TW/')[1]}' for i in diff_headfile_names]
+diff_filenames = [f'{i[0].split('TW/')[1]}::{i[1]}' for i in diff_headfile_names]
 
-# for i in pcd_already_done:
-#     print(i)
+for i in pcd_already_done:
+    print(i)
 
-# done_txt = 'step_3_4_1210_03.txt'
+# done_txt = '1212_temp_step_3_4.txt'
 # with open(done_txt, 'w+') as f:
 #     f.write('\n'.join(done))
 
-# diff_headfile_txt = 'diff_head_1210_03.txt'
+# diff_headfile_txt = '1212_temp_diff_head.txt'
 # with open(diff_headfile_txt, 'w+') as f:
-#     f.write('\n'.join(diff_headfile_names))
+#     f.write('\n'.join(list(set(diff_headfiles))))
+
+# diff_filenames_txt = '1212_temp_diff_file.txt'
+# with open(diff_filenames_txt, 'w+') as f:
+#     f.write('\n'.join(diff_filenames))
 
 for i in done:
     print(i)
+
+print('\n')
+print('\n')
+for i in diff_headfile_names:
+    print(f'{i[0].split('TW/')[1]}::{i[1]}')
 
 # print(diff_headfile_names)
 

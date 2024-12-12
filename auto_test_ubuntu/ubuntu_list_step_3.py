@@ -191,6 +191,7 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
         if int(cur_keyf) in img_keyf_list:
             img_times_list.append(float(cur_tstamp))
 
+    print(img_times_list)
 
     result_parentd = os.path.dirname(result_rootd)
     target_timeline = os.path.basename(result_rootd)
@@ -216,6 +217,7 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
         for line in file:
             cur_target_time = img_times_list[img_times_idx]
             timestamp_sec = float(line.strip()) # 각 라인의 앞뒤 공백 제거
+            # print(timestamp_sec)
             
 
             cur_timestamp = int(timestamp_sec * 1_000_000_000)#int.from_bytes(data[:8], byteorder='little')
@@ -230,6 +232,7 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
 
             index += 1
 
+    print(lidar_time_idx_list)
 
     # 찾은 timestamp 
     with open(lidar_file, 'rb') as hf:
