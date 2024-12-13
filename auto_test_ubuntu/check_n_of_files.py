@@ -16,9 +16,9 @@ pcd_already_done = []
 #                   '20241031_164639_Sinwol2Kanghwh_20241031_183546',
 #                   '20241031_195810_Kwanghwa2KwangMyung']
 curation_1 = ['20241004_174606_Mabook2Banpo',
-                  '20241007_095120_Anyang2Dangjin',
-                  '20241007_100316_Anyang2Dangjin',
-                  '20241031_195810_Kwanghwa2KwangMyung']
+              '20241007_095120_Anyang2Dangjin',
+              '20241007_100316_Anyang2Dangjin',
+              '20241031_195810_Kwanghwa2KwangMyung']
 
 curation_2 = ['20241008_110805_Kangdonggu2Yangpyeong',
               '20241008_153547_Gapyung2Songpa',
@@ -49,7 +49,14 @@ curation_5 = ['20241008_153702_Gapyung2Songpa',
               '20241030_194046_KwangMyung2Anyang',
               '20241116_124323_Gamgok2Chungju']
 
-step_1_folders = curation_1 + curation_2 + curation_3 + curation_4 + curation_5
+curation_6 = ['20241109_162130_Gapyeong2Chuncheon',
+              '20241109_165220_Gapyeong2Chuncheon2',
+              '20241109_130313_Songpa2Namisum',
+              '20241109_102338_Banpo2Jamsil',
+              '20241104_083919_Banpo2Anyang',
+              '20241014_143600_Chulwon2Sadang']
+
+step_1_folders = curation_1 + curation_2 + curation_3 + curation_4 + curation_5 + curation_6
 
 # step_1_dir = '/home/ubuntu/MOBIS_MCAM1.0_Curation'
 
