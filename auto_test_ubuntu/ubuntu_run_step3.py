@@ -12,7 +12,7 @@ files_for_step_3 = []
 pcd_already_done = []
 not_enough_files = []
 # search only input folders:
-step_1_folders = ['20241109_165220_Gapyeong2Chuncheon2', '20241014_143600_Chulwon2Sadang']
+step_1_folders = ['20241101_161102_Mabook2Youido', '20241110_122541_Kwangmyung2Siheung', '20241109_175720_Chuncheon2Kwangmyung']
 
 
 def check_step_2(folder_dir):

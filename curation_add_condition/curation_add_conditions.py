@@ -3,9 +3,9 @@ import pandas as pd
 import os
 import json
 
-nx4_excel = 'NX4 curation list (1).xlsx'
+nx4_excel = 'NX4 curation list (2).xlsx'
 mcam_excel = 'MCAM Curation.xlsx'
-hm_excel = 'hm_curation_list_3.xlsx'
+hm_excel = 'hm_curation_list_4.xlsx'
 
 cols_nx4_excel = ['data 생성일', '하위 폴더명', 'PNG 개수', 
                  'JSON 개수', 'PCD 개수', 'RAW BIN', 
