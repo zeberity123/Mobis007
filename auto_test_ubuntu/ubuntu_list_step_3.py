@@ -133,24 +133,28 @@ DATA ascii
 def check_headfile_filename(head_dir):
     head_file = head_dir
     # filename test:
-    try:
-        with open(head_file, "r") as file:
-            return 0
-    except:
-        num_headfile = head_file[-16:]
-        original_headnum = int(num_headfile.split('.')[0]) - 1
-        str_original_headnum = str(original_headnum).zfill(6)
-        str_new_headnum = str(original_headnum+1).zfill(6)
-        original_headfile = f'{head_file[:-16]}{str_original_headnum}.timestamp'
-        original_bin_file = f'{head_file[:-16]}{str_original_headnum}.bin'
-        new_bin_file = f'{head_file[:-16]}{str_new_headnum}.bin'
-        print('errrorrrrr', num_headfile)
-        if os.path.isfile(original_headfile) and os.path.isfile(original_bin_file):
-            print(f'changing {original_headfile} to {head_file}')
-            # os.rename(original_headfile, head_file)
-            # os.rename(original_bin_file, new_bin_file)
-            return f'{head_file}'
-        return f'{head_file}'
+    if os.path.exists(head_file):
+        return True
+    else:
+        return False
+    # try:
+    #     with open(head_file, "r") as file:
+    #         return 0
+    # except:
+    #     num_headfile = head_file[-16:]
+    #     original_headnum = int(num_headfile.split('.')[0]) - 1
+    #     str_original_headnum = str(original_headnum).zfill(6)
+    #     str_new_headnum = str(original_headnum+1).zfill(6)
+    #     original_headfile = f'{head_file[:-16]}{str_original_headnum}.timestamp'
+    #     original_bin_file = f'{head_file[:-16]}{str_original_headnum}.bin'
+    #     new_bin_file = f'{head_file[:-16]}{str_new_headnum}.bin'
+    #     print('errrorrrrr', num_headfile)
+    #     if os.path.isfile(original_headfile) and os.path.isfile(original_bin_file):
+    #         print(f'changing {original_headfile} to {head_file}')
+    #         # os.rename(original_headfile, head_file)
+    #         # os.rename(original_bin_file, new_bin_file)
+    #         return f'{head_file}'
+    #     return f'{head_file}'
 
 def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
     # Step1 작업이 수행된 폴더 중 1개를 지정
@@ -191,7 +195,7 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
         if int(cur_keyf) in img_keyf_list:
             img_times_list.append(float(cur_tstamp))
 
-    print(img_times_list)
+    # print(img_times_list)
 
     result_parentd = os.path.dirname(result_rootd)
     target_timeline = os.path.basename(result_rootd)
@@ -232,7 +236,7 @@ def auto_step_3(result_dir_from_1, lidar_dir, head_dir, key_frame_num):
 
             index += 1
 
-    print(lidar_time_idx_list)
+    # print(lidar_time_idx_list)
 
     # 찾은 timestamp 
     with open(lidar_file, 'rb') as hf:

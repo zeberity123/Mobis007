@@ -2,6 +2,7 @@ import os
 import ubuntu_list_step_3
 import set_step_4
 import cv2
+from datetime import datetime
 
 # 상위폴더 이름
 origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
@@ -67,15 +68,19 @@ for i in files_for_step_3:
     cnt+=1
     e1 = cv2.getTickCount()
     diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
-    if diff_headfile_name != 0:
-        diff_headfile_names.append([diff_headfile_name, i[3]])
-    # ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
-    # set_step_4.auto_step_4(i[4])
-    # set_step_4.delete_json(i[4])
+    if diff_headfile_name:
+        # ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
+        # set_step_4.auto_step_4(i[4])
+        done.append(f'done: {i[0]}::{i[3]}')
+        # set_step_4.delete_json(i[4])
+    else:
+        diff_headfile_names.append([i[2], i[3]])
+
     e2 = cv2.getTickCount()
-    done.append(f'done: {i[0]}::{i[3]}')
+    
     total_time = (e2-e1)/cv2.getTickFrequency()
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
+
 
 diff_headfiles = [f'{i[0].split('TW/')[1]}' for i in diff_headfile_names]
 diff_filenames = [f'{i[0].split('TW/')[1]}::{i[1]}' for i in diff_headfile_names]
@@ -83,33 +88,35 @@ diff_filenames = [f'{i[0].split('TW/')[1]}::{i[1]}' for i in diff_headfile_names
 # for i in pcd_already_done:
 #     print(i)
 
-# done_txt = '1212_temp_step_3_4.txt'
+time_now = datetime.now()
+file_suffix = f'{time_now.strftime('%m%d%H%M')}'
+done_txt = f'{file_suffix}_step4.txt'
 # with open(done_txt, 'w+') as f:
 #     f.write('\n'.join(done))
 
-# diff_headfile_txt = '1212_temp_diff_head.txt'
+# diff_headfile_txt = f'{file_suffix}_diff_head.txt'
 # with open(diff_headfile_txt, 'w+') as f:
 #     f.write('\n'.join(list(set(diff_headfiles))))
 
-# diff_filenames_txt = '1212_temp_diff_file.txt'
+# diff_filenames_txt = f'{file_suffix}_diff_file.txt'
 # with open(diff_filenames_txt, 'w+') as f:
 #     f.write('\n'.join(diff_filenames))
 
-pcd_already_done_txt = 'pcd_already_done.txt'
-with open(pcd_already_done_txt, 'w+') as f:
-    f.write('\n'.join(pcd_already_done))
-
 print('\n')
-print('\n')
+print('not enough_files:')
 for i in not_enough_files:
     print(i)
 
 print('\n')
-print('\n')
-for i in diff_headfile_names:
-    print(f'{i[0].split('TW/')[1]}::{i[1]}')
+print('dones:')
+# for i in diff_headfile_names:
+#     print(f'{i[0].split('TW/')[1]}::{i[1]}')
+
+for i in done:
+    print(i)
 
 # print(diff_headfile_names)
 
 print(f'n_of_done: {len(done)}')
+print(f'n_of_diff_head: {len(diff_headfile_names)}')
 print(f'n_of_pcd_already_done: {len(pcd_already_done)}')

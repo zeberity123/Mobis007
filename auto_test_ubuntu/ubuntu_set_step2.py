@@ -3,12 +3,12 @@ import list_step_2
 import cv2
 
 # 상위폴더 이름
-result_folder_name = f'20241111_182858_Gwacheon2Kwangmyung'
+result_folder_name = f'20241109_130313_Songpa2Namisum'
 # 키프레임
 # key_frames = '042693, 042753, 042813'
 
 # key_frames = '042693'
-key_frames = '203027	204647	207527	210107	219047	223445	231605	241197	243117	246531	251751	252831'
+key_frames = '005709'
 key_frames = [i.strip() for i in key_frames.split('\t')]
 print(key_frames)
 origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
@@ -36,6 +36,8 @@ cnt = 0
 for i in files_for_step_2:
     cnt+=1
     e1 = cv2.getTickCount()
+    for j in i:
+        print(j)
     # print([0], i[1], i[2], i[3])
     list_step_2.auto_step_2(i[0], i[1], i[2], i[3])
     e2 = cv2.getTickCount()
