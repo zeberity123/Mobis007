@@ -13,7 +13,7 @@ pcd_already_done = []
 not_enough_files = []
 # search only input folders:
 # step_1_folders = ['20241116_110423_Osan2Chungju', '20241113_191104_Namisum2Gwangmyung']
-step_1_folders = ['20241101_161102_Mabook2Youido', '20241110_122541_Kwangmyung2Siheung', '20241109_175720_Chuncheon2Kwangmyung']
+# step_1_folders = ['20241101_161102_Mabook2Youido', '20241110_122541_Kwangmyung2Siheung', '20241109_175720_Chuncheon2Kwangmyung']
 
 
 def check_step_2(folder_dir):
@@ -36,7 +36,7 @@ for folder_name in step_1_folders:
         if len(i_split) == 5:
             i_folder_list = os.listdir(f'{step_1_dir}/{folder_name}/{i}')
             # if 'pcd' not in i_folder_list:
-            if ('8879_ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
+            if ('ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
                 if check_step_2(f'{step_1_dir}/{folder_name}/{i}'):
                     key_frame = i_split[-1]
                     fname_no_frame = f'{i_split[0]}_{i_split[1]}'
