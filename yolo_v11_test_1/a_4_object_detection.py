@@ -18,7 +18,7 @@ keyframe_condition = excel_data['keyframe_condition'].tolist()
 objects_a4 = excel_data['objects_a4'].tolist()
 
 keyframes_a4 = []
-nas_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203'
+nas_root = f'Z:/step_1_241203'
 for i in range(len(keyframe_condition)):
 # for i in range(95):
     conditions = keyframe_condition[i].split(',')
@@ -53,9 +53,9 @@ for keyframe in keyframes_a4:
                 
         new_filename = keyframe[1] + '/' + keyframe[2] + '/' + keyframe[3]
         new_img_name = keyframe[2] + '_' + keyframe[3].split('_')[-1].zfill(6)
-        p_results[0].save(f'detection_results_1219/{new_img_name}.png')
+        p_results[0].save(f'detection_results_1221/{new_img_name}.png')
 
-        detection_results.append(f'{new_filename} => car: {temp_classes['car']}, bicycle: {temp_classes['bicycle']}, motorcycle: {temp_classes['motorcycle']}, person: {temp_classes['person']}')
+        detection_results.append(f"{new_filename} => car: {temp_classes['car']}, bicycle: {temp_classes['bicycle']}, motorcycle: {temp_classes['motorcycle']}, person: {temp_classes['person']}")
     else:
         new_filename = keyframe[1] + '/' + keyframe[2] + '/' + keyframe[3]
         detection_results.append(f'{new_filename} :: error')
@@ -66,5 +66,5 @@ e2 = cv2.getTickCount()
 t_time = (e2-e1)/cv2.getTickFrequency()
 print(f'Total_time: {t_time} seconds')
 
-with open('detection_result_1219.txt', '+w') as f:
+with open('detection_result_1224.txt', '+w') as f:
     f.write('\n'.join(detection_results))

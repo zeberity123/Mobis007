@@ -2,7 +2,7 @@ from ultralytics import YOLO
 import numpy as np
 
 
-model = YOLO("traffic_sign_detector.pt")
+model = YOLO("yolo11x.pt")
 
 p_results = model("089083.png")
 
