@@ -5,8 +5,8 @@ from datetime import datetime
 
 
 def step2():
-    result_folder_name = f''
-    key_frames = ''
+    result_folder_name = f'20241118_131338_Icheon2Gapyung'
+    key_frames = '9521	23509	41617	55673	94431	109191'
 
     key_frames = [i.strip() for i in key_frames.split('\t')]
 

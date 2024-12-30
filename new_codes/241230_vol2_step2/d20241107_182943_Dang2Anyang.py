@@ -5,14 +5,14 @@ from datetime import datetime
 
 
 def step2():
-    result_folder_name = f''
-    key_frames = ''
+    result_folder_name = f'20241107_182943_Dang2Anyang'
+    key_frames = '12889	20951'
 
     key_frames = [i.strip() for i in key_frames.split('\t')]
 
     print(key_frames)
-    origin_tw_root = f'Y:/MOBIS_vol_2'                                      
-    home_root = f'Y:/MOBIS_vol_2/step1_241217'
+    origin_tw_root = f'Z:/TW'                                      
+    home_root = f'Z:/step_1_241203'
 
     result_folder_dir = f'{home_root}/{result_folder_name}'
 
@@ -39,7 +39,7 @@ def step2():
         try:
             list_step_2.auto_step_2(i[0], i[1], i[2], i[3])
         except:
-            error_list.append(f'{i[0].split('step1_241217/')[1]} :: {i[3]}')
+            error_list.append(f'{i[0].split('step_1_241203/')[1]} :: {i[3]}')
         e2 = cv2.getTickCount()
 
         total_time = (e2-e1)/cv2.getTickFrequency()

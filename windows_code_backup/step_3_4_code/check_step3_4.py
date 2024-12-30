@@ -116,12 +116,12 @@ for i in not_enough_files:
     print(i)
 
 print('\n')
-# print('dones:')
+print('dones:')
 # # for i in diff_headfile_names:
 # #     print(f'{i[0].split('TW/')[1]}::{i[1]}')
 
-# for i in done:
-#     print(i)
+for i in done:
+    print(i)
 
 # print(diff_headfile_names)
 
