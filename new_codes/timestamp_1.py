@@ -67,7 +67,8 @@ def load_json_file(file_path):
 if __name__ == '__main__':
     # 확인할 디렉토리와 키워드 정의
     base_directories = [
-        fr'Y:\\step1_241217'
+        # fr'Y:\\step1_241217'
+        fr'C:\\Users\\user\\Desktop\\test_timestamp_error\\error_original'
         # fr'/run/user/1000/gvfs/smb-share:server=192.168.100.60,share=m_data/Step2_',
         # fr'/run/user/1000/gvfs/smb-share:server=192.168.100.60,share=m_data/Step1_2_3',
         # fr'/run/user/1000/gvfs/smb-share:server=192.168.100.60,share=m_data/Step2_All_Complete',
