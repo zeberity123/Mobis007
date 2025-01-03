@@ -5,8 +5,8 @@ import cv2
 from datetime import datetime
 
 # 상위폴더 이름
-origin_tw_root = f'Z:/TW'                                      
-step_1_dir = f'Z:/step_1_241203'
+origin_tw_root = f'Y:/MOBIS_vol_2'                                      
+step_1_dir = f'Y:/MOBIS_vol_2/step1_241217'
 
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
@@ -36,7 +36,7 @@ for folder_name in step_1_folders:
         if len(i_split) == 5:
             i_folder_list = os.listdir(f'{step_1_dir}/{folder_name}/{i}')
             # if 'pcd' not in i_folder_list:
-            if ('8879_ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
+            if ('ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
                 if check_step_2(f'{step_1_dir}/{folder_name}/{i}'):
                     key_frame = i_split[-1]
                     fname_no_frame = f'{i_split[0]}_{i_split[1]}'
@@ -82,8 +82,8 @@ for i in files_for_step_3:
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
 
-diff_headfiles = [f'{i[0].split('TW/')[1]}' for i in diff_headfile_names]
-diff_filenames = [f'{i[0].split('TW/')[1]}::{i[1]}' for i in diff_headfile_names]
+diff_headfiles = [f'{i[0].split('vol_2')[1]}' for i in diff_headfile_names]
+diff_filenames = [f'{i[0].split('vol_2')[1]}::{i[1]}' for i in diff_headfile_names]
 
 
 
@@ -125,6 +125,11 @@ with open(diff_filenames_txt, 'w+') as f:
 not_enough_files_txt = f'{file_prefix}_not101010.txt'
 with open(not_enough_files_txt, 'w+') as f:
     f.write('\n'.join(not_enough_files))
+
+print('\n')
+print('dones:')
+# # for i in diff_headfile_names:
+# #     print(f'{i[0].split('TW/')[1]}::{i[1]}')
 
 # for i in done:
 #     print(i)

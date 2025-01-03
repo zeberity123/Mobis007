@@ -8,8 +8,8 @@ from datetime import datetime
 # origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
 # step_1_dir = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203'
 
-origin_tw_root = f'Z:/TW'                                      
-step_1_dir = f'Z:/step_1_241203'
+origin_tw_root = f'Y:/MOBIS_MCAM1.0_02'                                      
+step_1_dir = f'Y:/MOBIS_MCAM1.0_02/step1_241227'
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
 pcd_already_done = []
@@ -39,7 +39,7 @@ for folder_name in step_1_folders:
         if len(i_split) == 5:
             i_folder_list = os.listdir(f'{step_1_dir}/{folder_name}/{i}')
             # if 'pcd' not in i_folder_list:
-            if ('8879_ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
+            if ('ldr2cam_calib.json' not in i_folder_list) and ('pcd' not in i_folder_list):
                 if check_step_2(f'{step_1_dir}/{folder_name}/{i}'):
                     key_frame = i_split[-1]
                     fname_no_frame = f'{i_split[0]}_{i_split[1]}'
@@ -67,17 +67,24 @@ cnt = 0
 done = []
 diff_headfile_names = []
 print(f'files to process: {len(files_for_step_3)}')
-for i in files_for_step_3:
+for i in files_for_step_3[:1]:
     # cnt+=1
     # e1 = cv2.getTickCount()
     diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
-    if diff_headfile_name:
+    if diff_headfile_name == 'head_exists':
         # ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
         # set_step_4.auto_step_4(i[4])
         done.append(f'done: {i[0]}::{i[3]}')
         # set_step_4.delete_json(i[4])
-    else:
+    elif diff_headfile_name == 'no_header':
         diff_headfile_names.append([i[2], i[3]])
+    else:
+        new_header, new_bin = diff_headfile_name
+        print(new_header)
+        print(new_bin)
+        ubuntu_list_step_3.auto_step_3(i[0], new_bin, new_header, int(i[3]))
+        set_step_4.auto_step_4(i[4])
+        done.append(f'done: {i[0]}::{i[3]}')
 
     # e2 = cv2.getTickCount()
     
@@ -85,14 +92,14 @@ for i in files_for_step_3:
     # print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
 
-diff_headfiles = [f'{i[0].split('TW/')[1]}' for i in diff_headfile_names]
-diff_filenames = [f'{i[0].split('TW/')[1]}::{i[1]}' for i in diff_headfile_names]
+# diff_headfiles = [f'{i[0].split('TW/')[1]}' for i in diff_headfile_names]
+# diff_filenames = [f'{i[0].split('TW/')[1]}::{i[1]}' for i in diff_headfile_names]
 
 # for i in pcd_already_done:
 #     print(i)
 
 time_now = datetime.now()
-file_prefix = f'{time_now.strftime('%m%d%H%M')}'
+file_prefix = f'{time_now.strftime("%m%d%H%M")}'
 
 # done_txt = f'{file_prefix}_step4.txt'
 # with open(done_txt, 'w+') as f:
@@ -123,7 +130,8 @@ print('dones:')
 for i in done:
     print(i)
 
-# print(diff_headfile_names)
+for i in diff_headfile_names:
+    print(i)
 
 print(f'n_of_done: {len(done)}')
 print(f'n_of_diff_head: {len(diff_headfile_names)}')

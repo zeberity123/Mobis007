@@ -134,9 +134,25 @@ def check_headfile_filename(head_dir):
     head_file = head_dir
     # filename test:
     if os.path.exists(head_file):
-        return True
+        return 'head_exists'
     else:
-        return False
+        # return False
+        num_headfile = head_file[-16:]
+        original_headnum = int(num_headfile.split('.')[0]) - 1
+        str_original_headnum = str(original_headnum).zfill(6)
+        str_new_headnum = str(original_headnum+1).zfill(6)
+        original_headfile = f'{head_file[:-16]}{str_original_headnum}.timestamp'
+        original_bin_file = f'{head_file[:-16]}{str_original_headnum}.bin'
+        new_bin_file = f'{head_file[:-16]}{str_new_headnum}.bin'
+        print('errrorrrrr', num_headfile)
+        if os.path.isfile(original_headfile) and os.path.isfile(original_bin_file):
+            # print(f'changing {original_headfile} to {head_file}')
+            print(f'***Using{original_headfile} instead of {head_file}')
+            # os.rename(original_headfile, head_file)
+            # os.rename(original_bin_file, new_bin_file)
+            return [original_headfile, original_bin_file]
+        else:
+            return 'no_header'
     # try:
     #     with open(head_file, "r") as file:
     #         return 0
