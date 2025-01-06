@@ -8,8 +8,8 @@ from datetime import datetime
 # origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
 # step_1_dir = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203'
 
-origin_tw_root = f'Y:/MOBIS_MCAM1.0_02'                                      
-step_1_dir = f'Y:/MOBIS_MCAM1.0_02/step1_241227'
+origin_tw_root = f'Y:/MOBIS_MCAM1.0_12'                                      
+step_1_dir = f'Y:/MOBIS_MCAM1.0_12/step1_241228'
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
 pcd_already_done = []
@@ -67,7 +67,7 @@ cnt = 0
 done = []
 diff_headfile_names = []
 print(f'files to process: {len(files_for_step_3)}')
-for i in files_for_step_3[:1]:
+for i in files_for_step_3:
     # cnt+=1
     # e1 = cv2.getTickCount()
     diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
@@ -82,8 +82,8 @@ for i in files_for_step_3[:1]:
         new_header, new_bin = diff_headfile_name
         print(new_header)
         print(new_bin)
-        ubuntu_list_step_3.auto_step_3(i[0], new_bin, new_header, int(i[3]))
-        set_step_4.auto_step_4(i[4])
+        # ubuntu_list_step_3.auto_step_3(i[0], new_bin, new_header, int(i[3]))
+        # set_step_4.auto_step_4(i[4])
         done.append(f'done: {i[0]}::{i[3]}')
 
     # e2 = cv2.getTickCount()

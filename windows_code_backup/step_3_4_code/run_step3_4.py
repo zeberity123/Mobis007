@@ -5,8 +5,8 @@ import cv2
 from datetime import datetime
 
 # 상위폴더 이름
-origin_tw_root = f'Y:/MOBIS_vol_2'                                      
-step_1_dir = f'Y:/MOBIS_vol_2/step1_241217'
+origin_tw_root = f'Y:/MOBIS_MCAM1.0_12'                                      
+step_1_dir = f'Y:/MOBIS_MCAM1.0_12/step1_241228'
 
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
@@ -68,13 +68,20 @@ for i in files_for_step_3:
     cnt+=1
     e1 = cv2.getTickCount()
     diff_headfile_name = ubuntu_list_step_3.check_headfile_filename(i[2])
-    if diff_headfile_name:
+    if diff_headfile_name == 'head_exists':
         ubuntu_list_step_3.auto_step_3(i[0], i[1], i[2], int(i[3]))
         set_step_4.auto_step_4(i[4])
         done.append(f'done: {i[0]}::{i[3]}')
         # set_step_4.delete_json(i[4])
-    else:
+    elif diff_headfile_name == 'no_header':
         diff_headfile_names.append([i[2], i[3]])
+    else:
+        new_header, new_bin = diff_headfile_name
+        print(new_header)
+        print(new_bin)
+        ubuntu_list_step_3.auto_step_3(i[0], new_bin, new_header, int(i[3]))
+        set_step_4.auto_step_4(i[4])
+        done.append(f'done: {i[0]}::{i[3]}')
 
     e2 = cv2.getTickCount()
     
@@ -82,8 +89,8 @@ for i in files_for_step_3:
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
 
-diff_headfiles = [f'{i[0].split('vol_2')[1]}' for i in diff_headfile_names]
-diff_filenames = [f'{i[0].split('vol_2')[1]}::{i[1]}' for i in diff_headfile_names]
+diff_headfiles = [f'{i[0].split('0_12')[1]}' for i in diff_headfile_names]
+diff_filenames = [f'{i[0].split('0_12')[1]}::{i[1]}' for i in diff_headfile_names]
 
 
 
