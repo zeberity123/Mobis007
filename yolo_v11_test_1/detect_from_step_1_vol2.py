@@ -36,7 +36,7 @@ with open('step1_vol2_detection_result_1231.txt', '+w') as f:
 with open('step1_vol2_only_a4_list_1231.txt', '+w', encoding='utf-8') as f:
     f.write('\n'.join(only_a4_list))
 
-for keyframe in keyframes_list:
+for keyframe in keyframes_list[:100]:
     cnt += 1
     img_root = keyframe
     # print(img_root)

@@ -1,1 +1,3 @@
 yolo_v11_test_1/*.pt
+yolo_v11_test_1/curation_1_8/
+new_codes/__pycache__/
