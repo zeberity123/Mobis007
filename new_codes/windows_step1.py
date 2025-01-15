@@ -37,7 +37,7 @@ cnt = 0
 for i in tw_list:
     cnt+=1
     e1 = cv2.getTickCount()
-    # list_step_1.auto_step_1(i[0], i[1], i[2])
+    list_step_1.auto_step_1(i[0], i[1], i[2])
     print(i)
     e2 = cv2.getTickCount()
     # print(i[0])

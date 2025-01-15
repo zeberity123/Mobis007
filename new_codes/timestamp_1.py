@@ -72,7 +72,7 @@ if __name__ == '__main__':
         # fr'Y:\\MOBIS_MCAM1.0_02\\step1_241227'
         # fr'Y:\\MOBIS_MCAM1.0_03\\step1_250101'
         # fr'Y:\\MOBIS_MCAM1.0_12\\step1_241228'
-        fr'Y:\\MOBIS_MCAM1.0_16\\step1_250114'
+        fr'Y:\\MOBIS_MCAM1.0_18\\step1_250115'
         # fr'/run/user/1000/gvfs/smb-share:server=192.168.100.60,share=m_data/Step2_',
         # fr'/run/user/1000/gvfs/smb-share:server=192.168.100.60,share=m_data/Step1_2_3',
         # fr'/run/user/1000/gvfs/smb-share:server=192.168.100.60,share=m_data/Step2_All_Complete',
