@@ -5,8 +5,8 @@ import cv2
 from datetime import datetime
 
 # 상위폴더 이름
-origin_tw_root = f'Y:/MOBIS_MCAM1.0_03'                                      
-step_1_dir = f'Y:/MOBIS_MCAM1.0_03/step1_250101'
+origin_tw_root = f'Y:/MOBIS_MCAM1.0_06'                                      
+step_1_dir = f'Y:/MOBIS_MCAM1.0_06/step1_250109'
 
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
@@ -89,8 +89,8 @@ for i in files_for_step_3:
     print(f'Total time: {total_time}seconds.....{cnt}/{len(files_for_step_3)}')
 
 
-diff_headfiles = [f'{i[0].split('0_03')[1]}' for i in diff_headfile_names]
-diff_filenames = [f'{i[0].split('0_03')[1]}::{i[1]}' for i in diff_headfile_names]
+diff_headfiles = [f'{i[0].split('0_06')[1]}' for i in diff_headfile_names]
+diff_filenames = [f'{i[0].split('0_06')[1]}::{i[1]}' for i in diff_headfile_names]
 
 
 
