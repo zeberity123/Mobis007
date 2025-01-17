@@ -5,9 +5,8 @@ from datetime import datetime
 
 
 def step2():
-    result_folder_name = f''
+    result_folder_name = f'20241106_171132_Hwado2Banpo'
     key_frames = ''
-
     key_frames = [i.strip() for i in key_frames.split('\t')]
 
     print(key_frames)

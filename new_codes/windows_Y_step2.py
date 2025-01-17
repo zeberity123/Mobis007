@@ -4,13 +4,13 @@ import cv2
 from datetime import datetime
 
 result_folder_name = f'20241116_213759_Injae2Anyang'
-key_frames = '150625	158347	167065	178033	192977	197837	201623	210851	214571	221063	223223	233963	235523	240023	248229	252189	253517	259277	268747	270127	277153	288981	310757	316517	318491	338171'
+key_frames = ''
 
 key_frames = [i.strip() for i in key_frames.split('\t')]
 
 print(key_frames)
 origin_tw_root = f'Y:/'                                      
-home_root = f'Y:/step1_241217'
+home_root = f'Y:/MOBIS_MCAM1.0_02_2/step1_250116'
 
 result_folder_dir = f'{home_root}/{result_folder_name}'
 

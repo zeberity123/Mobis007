@@ -2,11 +2,11 @@ import os
 import list_step_1
 import cv2
 
-vol_2 = f'Y:/MOBIS_MCAM1.0_02_2'
+vol_2 = f'Y:/MOBIS_MCAM1.0_10'
 
 origin_tw_root = vol_2
 
-home_root = f'Y:/MOBIS_MCAM1.0_02_2/step1_250116'
+home_root = f'Y:/MOBIS_MCAM1.0_10/step1_250117'
 
 tw_folder_list = []
 for i in os.listdir(origin_tw_root):
