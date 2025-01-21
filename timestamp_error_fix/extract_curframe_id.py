@@ -4,17 +4,16 @@ from datetime import datetime
 import cv2
 
 #====================================#
-excel = 'excel_list.xlsx'
-col_to_use = 'D'
+excel = 'excel_example.xlsx'
 drives = {
-    'vol1': fr'Z:',
-    'vol2': fr'Y:'
+    'vol1': 'Z:',
+    'vol2': 'Y:'
 }
 #====================================#
 
 def excel_to_folder_list(excel):
     cols = ['folder_name']
-    df = pd.read_excel(excel, usecols=col_to_use, dtype={'folder_name': str}, names=cols, sheet_name=4, header=9)
+    df = pd.read_excel(excel, usecols='D', dtype={'folder_name': str}, names=cols, sheet_name=4, header=9)
     folder_names = df['folder_name'].to_list()
     return folder_names
 
@@ -77,7 +76,7 @@ all_yuuv = get_all_yuuv(drives)
 curframe_dict = {}
 unique_nums = {}
 
-e1 = cv2.getTickCount()
+# e1 = cv2.getTickCount()
 cnt = 0
 for i in folder_lists:
     cnt += 1
@@ -95,12 +94,13 @@ for i in folder_lists:
     
     print(f'extracting... {cnt}/{len(folder_lists)} :: {i}')
 
-e2 = cv2.getTickCount()
-total_time = (e2-e1)/cv2.getTickFrequency()
-print(f'total_time: {total_time}')
+# e2 = cv2.getTickCount()
+# total_time = (e2-e1)/cv2.getTickFrequency()
+# print(f'total_time: {total_time}')
 
 df = pd.DataFrame(data=curframe_dict, index=[0])
 df = (df.T)
 time_now = datetime.now()
 file_suffix = f'{time_now.strftime("%m%d%H%M")}'
 df.to_excel(f'curframe_ids_{file_suffix}.xlsx')
+print(f'saved curframe_ids_{file_suffix}.xlsx')
