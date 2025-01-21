@@ -1,42 +1,55 @@
-# -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
 import os
-import numpy as np
+import pandas as pd
+from datetime import datetime
 import cv2
-import time
-import random
-# head 파일에서 읽어들인 timestamp 값을 unix timestamp 포맷으로 출력해주는 값.
-def nanoseconds_to_unix_timestamp(nanoseconds, gmt_offset_hours=9):
-    # 나노초를 초로 변환 (10^9 나누기)
-    # seconds : 정수 초
-    # microseconds : 마이크로 초
-    seconds = nanoseconds // 1e9
-    microseconds = (nanoseconds % 1e9) // 1e3
 
-    # 1970년 1월 1일 기준 시간 (Unix epoch)
-    epoch = datetime(1970, 1, 1)
+#====================================#
+excel = 'excel_list.xlsx'
+col_to_use = 'D'
+drives = {
+    'vol1': fr'Z:',
+    'vol2': fr'Y:'
+}
+#====================================#
 
-    # 나노초로부터 현재 시간을 계산
-    timestamp_datetime = epoch + timedelta(seconds=seconds)
+def excel_to_folder_list(excel):
+    cols = ['folder_name']
+    df = pd.read_excel(excel, usecols=col_to_use, dtype={'folder_name': str}, names=cols, sheet_name=4, header=9)
+    folder_names = df['folder_name'].to_list()
+    return folder_names
 
-    # GMT+09:00 오프셋을 적용하여 현지 시간으로 변환
-    timestamp_with_offset = timestamp_datetime + timedelta(hours=gmt_offset_hours)
+def get_all_yuuv(drives):
+    folders_to_search = []
+    for i in os.listdir(fr'{drives["vol1"]}\TW'):
+        if len(i.split('_')) >= 2 and 'mcam_v5' not in i:
+            folders_to_search.append(fr'{drives["vol1"]}\TW\{i}')
 
-    formatted_time = timestamp_with_offset.strftime("%Y%m%d%H%M%S")
+    for i in os.listdir(fr'{drives["vol2"]}'):
+        if 'MOBIS' in i:
+            for j in os.listdir(fr'{drives["vol2"]}\{i}'):
+                if ('step1' not in j) and len(j.split('_')) >= 2:
+                    folders_to_search.append(fr'{drives["vol2"]}\{i}\{j}')
 
-    # 최종적으로 UNIX timestamp (초 단위) 반환
-    return f"{formatted_time}.{int(microseconds):06d}"
+    all_yuuv = []
+    cnt = 0       
+    for i in folders_to_search:
+        cnt += 1
+        temp_root = fr'{i}\Front\Video'
+        try:
+            for j in os.listdir(temp_root):
+                if j.split('_')[-1] == '30Hz.bin':
+                    all_yuuv.append(fr'{temp_root}\{j}')
+        except:
+            pass
+        print(f'scanning... {cnt}/{len(folders_to_search)} :: {i}')
 
+    for i in all_yuuv:
+        print(i)
+    print(f'n_of_yuuvs: {len(all_yuuv)}\n')
+    
+    return all_yuuv
 
 def extract_info_from_yplane(raw_data):
-    str_F = raw_data[1:2].decode()  # 'F'
-    str_R = raw_data[3:4].decode()  # 'R'
-    str_C = raw_data[5:6].decode()  # 'C'
-    str_M = raw_data[7:8].decode()  # 'M'
-    str_2nd_R = raw_data[9:10].decode()  # 'R'
-
-    vid_str = str_F + str_R + str_C + str_M + str_2nd_R
-
     fid_up_u32 = int.from_bytes(raw_data[13:14], byteorder='little') << 24
     fid_up_u32 |= int.from_bytes(raw_data[15:16], byteorder='little') << 16
     fid_up_u32 |= int.from_bytes(raw_data[17:18], byteorder='little') << 8
@@ -49,64 +62,45 @@ def extract_info_from_yplane(raw_data):
     frame_id = int(fid_up_u32) << 32
     frame_id |= fid_low_u32
 
-    Context = raw_data[35]
-
-
-    return vid_str, int(frame_id), int(Context)
-
-
-def yuv422_to_rgb(raw_data):
-    # YUV Frame Total Size(in Bytes) : 64 + 1920*1080*2 = 4,147,264 Bytes
-    #r_raw_data = raw_data[64:]
-    width = 1920
-    height = 1080
-
-    yuv_frame = np.frombuffer(raw_data, dtype=np.uint8)
-    
-    # 현재 모비스 데이터를 확인해보니 yuv422 포맷 중, UYVY 포맷이었다.
-    y = yuv_frame[1::2].reshape((height, width))  # 모든 홀수 인덱스는 Y 값
-    u = yuv_frame[0::4].reshape((height, width // 2))  # U 값 (U는 4개당 1개)
-    v = yuv_frame[2::4].reshape((height, width // 2))  # V 값 (V는 4개당 1개)
-
-    # u와 v가 높이가 절반이므로 업샘플링을 수행한다.
-    u = u.repeat(2, axis=1)
-    v = v.repeat(2, axis=1)
-
-    # u, v에는 -128을 적용한다.
-    u = u.astype(np.int16) - 128
-    v = v.astype(np.int16) - 128
-    y = y.astype(np.int16)
-
-    # YUV to RGB
-    # b = (4096 * y) + (7600 * u) + (2 * v)) / 4096
-    # g = (4096 * y) + (-767 * u) + (-1918 * v)) / 4096
-    # r = (4096 * y) + (-3 * u) + (6449 * v)) / 4096
-    b = (y + (1.85546875 * u) + (0.00048828125 * v)).astype(np.int16)
-    g = (y - (0.187255859375 * u) - (0.46826171875 * v)).astype(np.int16)
-    r = (y - (0.000732421875 * u) + (1.574462890625 * v)).astype(np.int16)
-
-    # # 값 범위를 0-255로 클램핑하고 uint8 형식으로 변환
-    r = np.clip(r, 0, 255).astype(np.uint8)
-    g = np.clip(g, 0, 255).astype(np.uint8)
-    b = np.clip(b, 0, 255).astype(np.uint8)
-
-    # RGB 채널을 합쳐서 이미지 생성
-    # opencv는 BGR 방식을 활용하기 떄문에 BGR 순서로 배포
-    rgb_image = np.stack([b, g, r], axis=-1)
-
-    return rgb_image
+    return int(frame_id)
 
 def extract_single_curfram_id(yuuv_file):
     with open(yuuv_file, 'rb') as raw_video_f:
-
-        # YUV422 형식은 Y, U, V 화소가 분리된 형식이라고 한다.
-        # field size = Y_plane(1920*1080) + U_plane(1920*540) + V_plane(1920*540) = 4147200이 나온다고 한다.
         raw_video_data = raw_video_f.read(4147264)#raw_video_f.read(4147200)
-
-
-        video_string, cur_frameid, cur_context = extract_info_from_yplane(raw_video_data[64:])
-        # all_file_name_mapping[]= cur_frameid
+        cur_frameid = extract_info_from_yplane(raw_video_data[64:])
         
     return cur_frameid
 
+folder_lists = excel_to_folder_list(excel)
+all_yuuv = get_all_yuuv(drives)
 
+curframe_dict = {}
+unique_nums = {}
+
+e1 = cv2.getTickCount()
+cnt = 0
+for i in folder_lists:
+    cnt += 1
+    i_split = i.split('_')
+    unique_num = i_split[2] + '_' + i_split[3]
+    if unique_num in unique_nums:
+        curframe_dict[i] = unique_nums[unique_num]
+    else:
+        for j in all_yuuv:
+            if unique_num in j:
+                cur_frameid = extract_single_curfram_id(j)
+                curframe_dict[i] = cur_frameid
+                unique_nums[unique_num] = cur_frameid
+                break
+    
+    print(f'extracting... {cnt}/{len(folder_lists)} :: {i}')
+
+e2 = cv2.getTickCount()
+total_time = (e2-e1)/cv2.getTickFrequency()
+print(f'total_time: {total_time}')
+
+df = pd.DataFrame(data=curframe_dict, index=[0])
+df = (df.T)
+time_now = datetime.now()
+file_suffix = f'{time_now.strftime("%m%d%H%M")}'
+df.to_excel(f'curframe_ids_{file_suffix}.xlsx')
