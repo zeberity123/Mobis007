@@ -96,26 +96,16 @@ def yuv422_to_rgb(raw_data):
 
     return rgb_image
 
+def extract_single_curfram_id(yuuv_file):
+    with open(yuuv_file, 'rb') as raw_video_f:
 
-# if __name__ == '__main__':
-def extract_curfram_ids(all_yuuv):
-
-    for yuuv_file in all_yuuv:
-        yuuv_file = fr'../Video/FRCMR_IMG_FR_UYVY_20241031_200110_1920_1080_30Hz.bin'
-
-        # ================================================================================================================
-        # Phase2. bin 파일로부터 png 파일을 추출하는 코드
-        # ================================================================================================================
-
-        with open(yuuv_file, 'rb') as raw_video_f:
-
-            # YUV422 형식은 Y, U, V 화소가 분리된 형식이라고 한다.
-            # field size = Y_plane(1920*1080) + U_plane(1920*540) + V_plane(1920*540) = 4147200이 나온다고 한다.
-            raw_video_data = raw_video_f.read(4147264)#raw_video_f.read(4147200)
+        # YUV422 형식은 Y, U, V 화소가 분리된 형식이라고 한다.
+        # field size = Y_plane(1920*1080) + U_plane(1920*540) + V_plane(1920*540) = 4147200이 나온다고 한다.
+        raw_video_data = raw_video_f.read(4147264)#raw_video_f.read(4147200)
 
 
-            video_string, cur_frameid, cur_context = extract_info_from_yplane(raw_video_data[64:])
-            # all_file_name_mapping[]= cur_frameid
+        video_string, cur_frameid, cur_context = extract_info_from_yplane(raw_video_data[64:])
+        # all_file_name_mapping[]= cur_frameid
         
     return cur_frameid
 
