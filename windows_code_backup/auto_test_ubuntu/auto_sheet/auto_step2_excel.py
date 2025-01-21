@@ -4,15 +4,14 @@ import cv2
 from datetime import datetime
 import pandas as pd
 
-excel_file = 'qwe123.xlsx'
-origin_tw_root = f'Y:/MOBIS_MCAM1.0_12_2'                            
-home_root = f'Y:/MOBIS_MCAM1.0_12_2/step1_250117'
+excel_file = 'zxc123.xlsx'
+origin_tw_root = fr'\\192.168.3.2\FC3_NAS_007_vol2\MOBIS_MCAM1.0_11'
 excel_cols = 'A:C'
 
 def step2(rfn, kfs):
-    # result_folder_name = f'20250114_204914_Night_Icheon2Seoul'
-    # key_frames = '125569'
-    # key_frames = [i.strip() for i in key_frames.split('\t')]
+    for i in os.listdir(origin_tw_root):
+        if 'step1' in i:
+            home_root = fr'{origin_tw_root}/{i}'
     result_folder_name = rfn
     key_frames = [kfs]
     
@@ -61,9 +60,8 @@ def step2(rfn, kfs):
     with open(error_txt, 'w+') as f:
         f.write('\n'.join(error_list))
 
-cols_excel = ['l_g', 'm_g', 'kf']
-
 def excel_to_list(excel_file):
+    cols_excel = ['l_g', 'm_g', 'kf']
     df = pd.read_excel(f'{excel_file}', engine='openpyxl', usecols=excel_cols, sheet_name=0, names=cols_excel, dtype={'l_g': str, 'm_g': str, 'kf': str})
     l_gs = df['l_g'].tolist()
     m_gs = df['m_g'].tolist()
@@ -79,10 +77,10 @@ def excel_to_list(excel_file):
 
 
 excel_list = excel_to_list(excel_file)
-fefs = len(excel_list)
+len_excel_list = len(excel_list)
 cnt = 0
 for i in excel_list:
     cnt += 1
     print(i)
     step2(i[0], i[2])
-    print(f'processing... {cnt}/{fefs}')
+    print(f'processing... {cnt}/{len_excel_list}')
