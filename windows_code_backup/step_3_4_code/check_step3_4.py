@@ -8,8 +8,8 @@ from datetime import datetime
 # origin_tw_root = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/TW'
 # step_1_dir = f'/run/user/1000/gvfs/smb-share:server=192.168.2.1,share=fc3_nas_007/step_1_241203'
 
-origin_tw_root = f'Y:/MOBIS_MCAM1.0_10'                                      
-step_1_dir = f'Y:/MOBIS_MCAM1.0_10/step1_250117'
+origin_tw_root = f'Y:/MOBIS_MCAM1.0_17'                                      
+step_1_dir = f'Y:/MOBIS_MCAM1.0_17/step1_250120'
 step_1_folders = os.listdir(step_1_dir)
 files_for_step_3 = []
 pcd_already_done = []

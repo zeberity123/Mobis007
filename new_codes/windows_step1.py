@@ -2,16 +2,16 @@ import os
 import list_step_1
 import cv2
 
-vol_2 = f'Y:/MOBIS_MCAM1.0_12_2'
+vol_2 = f'Y:/MOBIS_MCAM1.0_11'
 
 origin_tw_root = vol_2
 
-home_root = f'Y:/MOBIS_MCAM1.0_12_2/step1_250117'
+home_root = f'Y:/MOBIS_MCAM1.0_11/step1_250120'
 
 tw_folder_list = []
 for i in os.listdir(origin_tw_root):
     # if len(i.split('_')) == 3 and i != '20241119_145440_Yangsuri2Mabook':
-    if len(i.split('_')) >= 3:
+    if len(i.split('_')) == 2:
         tw_folder_list.append(i)
 
 print(tw_folder_list)

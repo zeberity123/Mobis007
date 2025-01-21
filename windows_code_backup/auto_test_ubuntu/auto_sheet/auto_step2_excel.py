@@ -4,6 +4,11 @@ import cv2
 from datetime import datetime
 import pandas as pd
 
+excel_file = 'qwe123.xlsx'
+origin_tw_root = f'Y:/MOBIS_MCAM1.0_12_2'                            
+home_root = f'Y:/MOBIS_MCAM1.0_12_2/step1_250117'
+excel_cols = 'A:C'
+
 def step2(rfn, kfs):
     # result_folder_name = f'20250114_204914_Night_Icheon2Seoul'
     # key_frames = '125569'
@@ -12,8 +17,6 @@ def step2(rfn, kfs):
     key_frames = [kfs]
     
     print(key_frames)
-    origin_tw_root = f'Y:/MOBIS_MCAM1.0_12_2'                            
-    home_root = f'Y:/MOBIS_MCAM1.0_12_2/step1_250117'
 
     result_folder_dir = f'{home_root}/{result_folder_name}'
 
@@ -44,7 +47,7 @@ def step2(rfn, kfs):
             list_step_2.auto_step_2(i[0], i[1], i[2], i[3])
             pass
         except:
-            error_list.append(f'{i[0].split('step1_250117/')[1]} :: {i[3]}')
+            error_list.append(f'{i[0].split(f'{home_root.split('/')[-1]}/')[1]} :: {i[3]}')
         e2 = cv2.getTickCount()
 
         total_time = (e2-e1)/cv2.getTickFrequency()
@@ -58,11 +61,10 @@ def step2(rfn, kfs):
     with open(error_txt, 'w+') as f:
         f.write('\n'.join(error_list))
 
-excel_file = 'qwe123.xlsx'
 cols_excel = ['l_g', 'm_g', 'kf']
 
 def excel_to_list(excel_file):
-    df = pd.read_excel(f'{excel_file}', engine='openpyxl', usecols='A:C', sheet_name=0, names=cols_excel, dtype={'l_g': str, 'm_g': str, 'kf': str})
+    df = pd.read_excel(f'{excel_file}', engine='openpyxl', usecols=excel_cols, sheet_name=0, names=cols_excel, dtype={'l_g': str, 'm_g': str, 'kf': str})
     l_gs = df['l_g'].tolist()
     m_gs = df['m_g'].tolist()
     kfs = df['kf'].tolist()
